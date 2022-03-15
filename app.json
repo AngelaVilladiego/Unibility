@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Unibility",
+    "slug": "Unibility",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Unibility"
+}
