@@ -8,10 +8,7 @@ class Home extends Component{
     render(){
         return(
             <View>
-                <Button
-                    title='Login'
-                    onPress={()=>this.props.navigation.navigate('Login')}
-                />
+                
             </View>
         );
     }

@@ -6,6 +6,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Views/Home';
 import Login from './Views/Login';
 import SplashScreen from './Views/SplashScreen';
+import Profile from './Views/Profile';
+import CreateReport from './Views/CreateReport';
+import UserSettings from './Views/UserSettings';
 import { title } from 'process';
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +30,10 @@ class App extends Component {
           <Stack.Screen
             name="Login"
             component={Login}
+          />
+          <Stack.Screen
+            name='Profile'
+            component={Profile}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -8,7 +8,13 @@ class SplashScreen extends Component{
     render(){
         return(
             <View>
-                <Text>Hello</Text>
+                <Button
+                    title='Login'
+                    onPress={()=>this.props.navigation.navigate('Login')}
+                />
+                <Button
+                    title='Signup'
+                />
             </View>
         )
     }
