@@ -21,7 +21,7 @@ class App extends Component {
           <Stack.Screen
             name='Splash'
             component={SplashScreen}
-            options={title="Welcome to Unibility!"}
+            options={{title: "Welcome to Unibility!"}}
           />
           <Stack.Screen
             name="Home"
