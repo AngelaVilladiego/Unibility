@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+//Change Buttons to TouchableOpacity https://reactnative.dev/docs/touchableopacity in later versions
+
 class SplashScreen extends Component{
     render(){
         return(
