@@ -12,6 +12,8 @@ import UserSettings from './Views/UserSettings';
 import { title } from 'process';
 import Signup from './Views/Signup';
 import Location from './Views/Location';
+import CreateRating from './Views/CreateRating';
+import ReviewsPage from './Views/ReviewsPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +58,14 @@ class App extends Component {
           <Stack.Screen
             name='CreateReport'
             component={CreateReport}
+          />
+          <Stack.Screen
+            name='CreateRating'
+            component={CreateRating}
+          />
+          <Stack.Screen
+            name='ReviewsPage'
+            component={ReviewsPage}
           />
         </Stack.Navigator>
       </NavigationContainer>

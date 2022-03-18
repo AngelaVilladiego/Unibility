@@ -1,28 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-class Login extends Component{
+class CreateRating extends Component{
     render(){
         return(
-            <View style={[styles.container, {flexDirection: 'column'}]}>
-                <Text style={styles.titleText}>Unibility</Text>
-                <Text style={styles.subtitle}>Universal ability for all</Text>
-                <View style={styles.form}>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>Email: </Text>
-                        <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="bFlay@hotmail.ca"></TextInput>
-                    </View>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>Password: </Text>
-                        <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="**********"></TextInput>
-                    </View>
+            <SafeAreaView>
+                <View>
+                    <Text style={styles.titleText}>Title</Text>
+                    <Text style={styles.titleText}>Accessibility Feature</Text>
+                    <Picker>
+                        <Picker.Item label="Elevator" value="Elevator" />
+                        <Picker.Item label="Ramp" value="Ramp" />
+                        <Picker.Item label="Parking" value="Parking" />
+                        <Picker.Item label="Automatic Doorway" value="Automatic Doorway" />
+                        <Picker.Item label="Noise Level" value="Noise Level" />
+                        <Picker.Item label="Other" value="Other" />
+                    </Picker>
+                    <Text style={styles.titleText}>Review</Text>
+                    <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="Write about the experience here..."></TextInput>
+                    <View style={styles.ctaBtn}>
+                    <Button title="Submit" color="#006955" onPress={() => this.props.navigation.navigate('Home')}></Button>
                 </View>
-                <View style={styles.ctaBtn}>
-                    <Button title="Login" color="#006955" onPress={() => this.props.navigation.navigate('ReviewsPage')}></Button>
                 </View>
-            </View>
+            </SafeAreaView>
         )
     }
 }
@@ -83,4 +86,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default Login;
+  export default CreateRating;
