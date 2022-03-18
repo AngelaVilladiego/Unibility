@@ -22,15 +22,15 @@ class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-            name="Location"
-            component={Location}
-          />
           <Stack.Screen
             name='Splash'
             component={SplashScreen}
             options={{title: "Welcome to Unibility!"}}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="Location"
+            component={Location}
           />
           <Stack.Screen
             name="Signup"
