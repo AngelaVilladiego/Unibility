@@ -39,6 +39,10 @@ class App extends Component {
               name="UserSettings"
               component={UserSettings}
           />
+          <Stack.Screen
+            name='CreateReport'
+            component={CreateReport}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
