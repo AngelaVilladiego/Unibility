@@ -10,6 +10,7 @@ import Profile from './Views/Profile';
 import CreateReport from './Views/CreateReport';
 import UserSettings from './Views/UserSettings';
 import { title } from 'process';
+import Signup from './Views/Signup';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,10 @@ class App extends Component {
             options={{title: "Welcome to Unibility!"}}
           />
           <Stack.Screen
+            name="Signup"
+            component={Signup}
+          />
+          <Stack.Screen
             options={{headerShown: false}}
             name="Home"
             component={Home}
@@ -32,6 +37,7 @@ class App extends Component {
             name="Login"
             component={Login}
           />
+          
           <Stack.Screen
             name='Profile'
             component={Profile}

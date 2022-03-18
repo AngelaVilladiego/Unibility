@@ -19,6 +19,7 @@ class SplashScreen extends Component{
                 />
                 <Button
                     title='Signup'
+                    onPress={()=>this.props.navigation.navigate('Signup')}
                     style={{flex: 2}}
                 />
             </View>
