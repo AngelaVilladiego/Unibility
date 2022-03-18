@@ -24,6 +24,7 @@ class App extends Component {
             options={{title: "Welcome to Unibility!"}}
           />
           <Stack.Screen
+            options={{headerShown: false}}
             name="Home"
             component={Home}
           />
