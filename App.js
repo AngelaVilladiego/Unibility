@@ -11,6 +11,7 @@ import CreateReport from './Views/CreateReport';
 import UserSettings from './Views/UserSettings';
 import { title } from 'process';
 import Signup from './Views/Signup';
+import Location from './Views/Location';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,11 @@ class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+        <Stack.Screen
+          options={{headerShown: false}}
+            name="Location"
+            component={Location}
+          />
           <Stack.Screen
             name='Splash'
             component={SplashScreen}
@@ -33,6 +39,7 @@ class App extends Component {
             name="Home"
             component={Home}
           />
+          
           <Stack.Screen
             name="Login"
             component={Login}

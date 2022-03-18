@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
       resizeMode: 'cover',
-      justifyContent: 'center',
+      justifyContent: 'center'
     },
     text: {
       color: 'white',
@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
     currLoc: {
         color: '#2f157d',
         fontSize: 42,
-        textAlign: 'center'
+        textAlign: 'center',
     },
     fabButton: {
         position: 'absolute',
         fontSize: 80,
         bottom: 40,
         right: 20,
-        textAlign: 'center',
+        textAlign: 'center'
     },
 
     topNav: {
@@ -98,7 +98,7 @@ class Home extends Component{
     render(){
         return(
             <View style={styles.container}>
-                <ImageBackground source={image} style={styles.image}>
+                <ImageBackground source={image} style={styles.image} onClick={() => this.props.navigation.navigate('Location')}>
                     <View style={styles.topNav}>
                         <View style={styles.menuBtn}>
                             <Icon name="menu" color="#fff" style={styles.innerMenu}/>
@@ -110,7 +110,7 @@ class Home extends Component{
                         </View>
                     </View>
                     <Icon style={styles.currLoc} name="location-on"/>
-                    <Icon style={styles.fabButton} name="maps-ugc" color='#ed6b00'/>
+                    <Icon style={styles.fabButton} name="maps-ugc" color='#ed6b00' onClick={() => this.props.navigation.navigate('CreateReport')}/>
                 </ImageBackground>     
             </View>
         );
