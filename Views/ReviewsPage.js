@@ -1,28 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-class Login extends Component{
+class ReviewsPage extends Component{
     render(){
         return(
-            <View style={[styles.container, {flexDirection: 'column'}]}>
-                <Text style={styles.titleText}>Unibility</Text>
-                <Text style={styles.subtitle}>Universal ability for all</Text>
-                <View style={styles.form}>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>Email: </Text>
-                        <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="bFlay@hotmail.ca"></TextInput>
-                    </View>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>Password: </Text>
-                        <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="**********"></TextInput>
-                    </View>
+            <SafeAreaView>
+                <View style={[styles.container, {flexDirection: 'column'}]}>
+                <View>
+                    <Text style={styles.titleText}>Reviews:</Text>
+                    <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="Review"></TextInput>
+                    <Text style={styles.titleText}>Reviews:</Text>
+                    <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="Review"></TextInput>
+                    <Text style={styles.titleText}>Reviews:</Text>
+                    <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="Review"></TextInput>
                 </View>
-                <View style={styles.ctaBtn}>
-                    <Button title="Login" color="#006955" onPress={() => this.props.navigation.navigate('ReviewsPage')}></Button>
                 </View>
-            </View>
+            </SafeAreaView>
         )
     }
 }
@@ -83,4 +79,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default Login;
+export default ReviewsPage;
