@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
-import { ImageBackground, StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { TouchableOpacity, ImageBackground, StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -44,10 +44,12 @@ const styles = StyleSheet.create({
     },
     fabButton: {
         position: 'absolute',
-        fontSize: 80,
         bottom: 40,
         right: 20,
         textAlign: 'center'
+    },
+    fabButtonInner: {
+        fontSize: 80,
     },
 
     topNav: {
@@ -98,10 +100,12 @@ class Home extends Component{
     render(){
         return(
             <View style={styles.container}>
-                <ImageBackground source={image} style={styles.image} onClick={() => this.props.navigation.navigate('Location')}>
+                <ImageBackground source={image} style={styles.image}>
                     <View style={styles.topNav}>
-                        <View style={styles.menuBtn} onClick={() => this.props.navigation.navigate('Profile')}>
-                            <Icon name="menu" color="#fff" style={styles.innerMenu}/>
+                        <View style={styles.menuBtn}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                                <Icon name="menu" color="#fff" style={styles.innerMenu}/>
+                            </TouchableOpacity>
                         </View>                        
                         <View style={styles.searchBox}>
                             <Text color="#666">
@@ -109,8 +113,12 @@ class Home extends Component{
                             </Text>
                         </View>
                     </View>
-                    <Icon style={styles.currLoc} name="location-on"/>
-                    <Icon style={styles.fabButton} name="maps-ugc" color='#ed6b00' onClick={() => this.props.navigation.navigate('CreateReport')}/>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Location')}>
+                        <Icon style={styles.currLoc} name="location-on"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.fabButton} onPress={() => this.props.navigation.navigate('CreateReport')}>
+                        <Icon style={styles.fabButtonInner} name="maps-ugc" color='#ed6b00'/>
+                    </TouchableOpacity>
                 </ImageBackground>     
             </View>
         );

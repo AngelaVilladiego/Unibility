@@ -49,7 +49,7 @@ class Location extends Component {
 
                     <View style={styles.rowCenter}>
                         <Text style={styles.navLinkSelect}>Overview</Text>
-                        <Text style={styles.navLink} onClick={() => this.props.navigation.navigate("ReviewsPage")}>Accessibility Reviews</Text>
+                        <Text style={styles.navLink} onPress={() => this.props.navigation.navigate("ReviewsPage")}>Accessibility Reviews</Text>
                     </View>
 
                     <Image style={styles.detsImg} source={require('./images/details.png')}/>
