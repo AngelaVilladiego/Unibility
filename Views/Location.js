@@ -12,7 +12,7 @@ class Location extends Component {
         return(
             <View style={styles.container}>
                 <View style={styles.topNav}>
-                    <View style={styles.menuBtn}>
+                    <View style={styles.menuBtn} onClick={() => this.props.navigation.navigate('Profile')}>
                         <Icon name="menu" color="#fff" style={styles.innerMenu}/>
                     </View>                        
                     <View style={styles.searchBox}>
@@ -54,10 +54,10 @@ class Location extends Component {
 
                     <Image style={styles.detsImg} source={require('./images/details.png')}/>
 
-                    <Button
+                    {/* <Button
                         title="Suggest an edit"
-                        onPress={() => this.props.navigation.navigate("CreateRating")}
-                        />
+                        onPress={() => this.props.navigation.navigate("CreateReport")}
+                        /> */}
                 </View>
                 
             </View>

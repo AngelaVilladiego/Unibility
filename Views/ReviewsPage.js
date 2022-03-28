@@ -4,6 +4,8 @@ import { Picker } from '@react-native-picker/picker';
 import { Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
+// todo navigation 
+
 class ReviewsPage extends Component{
     render(){
         return(
@@ -16,6 +18,9 @@ class ReviewsPage extends Component{
                     <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="Review"></TextInput>
                     <Text style={styles.titleText}>Reviews:</Text>
                     <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="Review"></TextInput>
+                </View>
+                <View style={styles.ctaBtn}>
+                    <Button title="Create a Rating" color="#006955" onPress={() => this.props.navigation.navigate('CreateRating')}></Button>
                 </View>
                 </View>
             </SafeAreaView>

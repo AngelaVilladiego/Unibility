@@ -22,7 +22,7 @@ class CreateRating extends Component{
                     <Text style={styles.titleText}>Review</Text>
                     <TextInput editable={false} selectTextOnFocus={false} style={styles.formFill} value="Write about the experience here..."></TextInput>
                     <View style={styles.ctaBtn}>
-                    <Button title="Submit" color="#006955" onPress={() => this.props.navigation.navigate('Home')}></Button>
+                    <Button title="Submit" color="#006955" onPress={() => this.props.navigation.navigate('Location')}></Button>
                 </View>
                 </View>
             </SafeAreaView>

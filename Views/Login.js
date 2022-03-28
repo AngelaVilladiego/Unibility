@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
+// todo navigation to home page
+
 class Login extends Component{
     render(){
         return(
@@ -20,7 +22,7 @@ class Login extends Component{
                     </View>
                 </View>
                 <View style={styles.ctaBtn}>
-                    <Button title="Login" color="#006955" onPress={() => this.props.navigation.navigate('ReviewsPage')}></Button>
+                    <Button title="Login" color="#006955" onPress={() => this.props.navigation.navigate('Home')}></Button>
                 </View>
             </View>
         )

@@ -100,7 +100,7 @@ class Home extends Component{
             <View style={styles.container}>
                 <ImageBackground source={image} style={styles.image} onClick={() => this.props.navigation.navigate('Location')}>
                     <View style={styles.topNav}>
-                        <View style={styles.menuBtn}>
+                        <View style={styles.menuBtn} onClick={() => this.props.navigation.navigate('Profile')}>
                             <Icon name="menu" color="#fff" style={styles.innerMenu}/>
                         </View>                        
                         <View style={styles.searchBox}>

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { Button, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 class CreateReport extends Component{
@@ -18,6 +18,10 @@ class CreateReport extends Component{
                         <Picker.Item label="Noise Level" value="Noise Level" />
                         <Picker.Item label="Other" value="Other" />
                     </Picker>
+
+                    <View style={styles.ctaBtn}>
+                    <Button title="Submit" color="#006955" onPress={() => this.props.navigation.navigate('Home')}></Button>
+                </View>
                 </View>
             </SafeAreaView>
         )
