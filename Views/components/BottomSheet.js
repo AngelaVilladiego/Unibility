@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   View,
+  Platform,
 } from "react-native";
 import React, {
   Component,
@@ -21,6 +22,9 @@ import Animated, {
 } from "react-native-reanimated";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
+if (Platform.OS === "web") {
+  const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+}
 
 const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
   const sheetColor = bgColor || "white";
@@ -54,13 +58,10 @@ const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
   useEffect(() => {
     if (!firstRender) {
       console.log(isUp, "- Has changed");
-      translateY.value = withSpring(
-        isUp ? -((2 * SCREEN_HEIGHT) / 3 + 20) : 0,
-        {
-          damping: 16,
-          stiffness: 175,
-        }
-      );
+      translateY.value = withSpring(isUp ? -((2 * SCREEN_HEIGHT) / 3) : 0, {
+        damping: 16,
+        stiffness: 175,
+      });
     }
     active.value = isUp;
   }, [isUp]);
@@ -79,10 +80,7 @@ const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
         { backgroundColor: sheetColor },
       ]}
     >
-      <View style={styles.content}>
-        {/* <TouchableOpacity style={styles.button} onPress={onPress} /> */}
-        {children}
-      </View>
+      {children}
     </Animated.View>
   );
 });
@@ -99,20 +97,5 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     overflow: "hidden",
     justifyContent: "flex-start",
-  },
-  bottomSheetTO: {
-    height: SCREEN_HEIGHT,
-    width: "100%",
-  },
-  content: {
-    flex: 1,
-  },
-  button: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    backgroundColor: "blue",
-    opacity: 0.6,
-    alignSelf: "center",
   },
 });

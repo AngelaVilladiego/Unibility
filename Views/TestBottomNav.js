@@ -6,10 +6,14 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  Platform,
 } from "react-native";
 import BottomSheet from "./components/BottomSheet";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
+if (Platform.OS === "web") {
+  const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+}
 
 const TestBottomNav = () => {
   const ref = useRef(null);
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#111",
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
   button: {
     height: 50,
