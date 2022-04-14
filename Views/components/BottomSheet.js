@@ -22,10 +22,12 @@ import Animated, {
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
 
-const BottomSheet = React.forwardRef(({}, ref) => {
+const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
+  const sheetColor = bgColor || "white";
+
   const [firstRender, setFirstRender] = useState(true);
   const translateY = useSharedValue(0);
-  const [isUp, setIsUp] = useState(true);
+  const [isUp, setIsUp] = useState(false);
   const active = useSharedValue(false);
 
   const setSheet = useCallback(
@@ -77,10 +79,16 @@ const BottomSheet = React.forwardRef(({}, ref) => {
   });
 
   return (
-    <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
-      <View style={styles.line} />
+    <Animated.View
+      style={[
+        styles.bottomSheetContainer,
+        rBottomSheetStyle,
+        { backgroundColor: sheetColor },
+      ]}
+    >
       <View style={styles.content}>
-        <TouchableOpacity style={styles.button} onPress={onPress} />
+        {/* <TouchableOpacity style={styles.button} onPress={onPress} /> */}
+        {children}
       </View>
     </Animated.View>
   );
@@ -92,22 +100,16 @@ const styles = StyleSheet.create({
   bottomSheetContainer: {
     height: SCREEN_HEIGHT,
     width: "100%",
-    backgroundColor: "white",
     position: "absolute",
     top: SCREEN_HEIGHT / 3,
-    borderRadius: 25,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    overflow: "hidden",
+    justifyContent: "flex-start",
   },
   bottomSheetTO: {
     height: SCREEN_HEIGHT,
     width: "100%",
-  },
-  line: {
-    width: 75,
-    height: 4,
-    backgroundColor: "grey",
-    alignSelf: "center",
-    marginVertical: 15,
-    borderRadius: 2,
   },
   content: {
     flex: 1,

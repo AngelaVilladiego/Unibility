@@ -21,10 +21,15 @@ const TestBottomNav = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        {/* <Text>Hi</Text> */}
-      </TouchableOpacity>
-      <BottomSheet ref={ref} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPress}
+      ></TouchableOpacity>
+      <BottomSheet ref={ref}>
+        <View style={styles.formContainer}>
+          <TouchableOpacity style={styles.button} onPress={onPress} />
+        </View>
+      </BottomSheet>
     </View>
   );
 };
@@ -40,8 +45,13 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 25,
-    backgroundColor: "white",
+    backgroundColor: "orange",
     opacity: 0.6,
+  },
+  formContainer: {
+    height: (2 * SCREEN_HEIGHT) / 3,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
