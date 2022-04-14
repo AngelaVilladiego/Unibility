@@ -25,7 +25,7 @@ const TestBottomNav = () => {
         style={styles.button}
         onPress={onPress}
       ></TouchableOpacity>
-      <BottomSheet ref={ref}>
+      <BottomSheet ref={ref} bgColor={"#457"}>
         <View style={styles.formContainer}>
           <TouchableOpacity style={styles.button} onPress={onPress} />
         </View>

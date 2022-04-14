@@ -34,7 +34,6 @@ const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
     (sheetUp) => {
       "worklet";
       setIsUp(sheetUp);
-      console.log(isUp, "callback");
     },
     [isUp]
   );
@@ -52,22 +51,16 @@ const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
     setFirstRender(false);
   }, []);
 
-  const onPress = () => {
-    toggleBottomSheet();
-  };
-
-  const toggleBottomSheet = () => {
-    var newIsUp = !isUp;
-    setSheet(newIsUp);
-  };
-
   useEffect(() => {
     if (!firstRender) {
       console.log(isUp, "- Has changed");
-      translateY.value = withSpring(isUp ? 0 : (2 * SCREEN_HEIGHT) / 3 + 20, {
-        damping: 16,
-        stiffness: 175,
-      });
+      translateY.value = withSpring(
+        isUp ? -((2 * SCREEN_HEIGHT) / 3 + 20) : 0,
+        {
+          damping: 16,
+          stiffness: 175,
+        }
+      );
     }
     active.value = isUp;
   }, [isUp]);
@@ -101,7 +94,7 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT,
     width: "100%",
     position: "absolute",
-    top: SCREEN_HEIGHT / 3,
+    top: SCREEN_HEIGHT,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     overflow: "hidden",
