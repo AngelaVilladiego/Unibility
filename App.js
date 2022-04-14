@@ -9,7 +9,7 @@ import SplashScreen from './Views/SplashScreen';
 import Profile from './Views/Profile';
 import CreateReport from './Views/CreateReport';
 import UserSettings from './Views/UserSettings';
-import { title } from 'process';
+//import { title } from 'process';
 import Signup from './Views/Signup';
 import Location from './Views/Location';
 import CreateRating from './Views/CreateRating';
