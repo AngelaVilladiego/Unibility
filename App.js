@@ -22,6 +22,7 @@ class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+        
           <Stack.Screen
             name='Splash'
             component={SplashScreen}

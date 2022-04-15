@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Button, StyleSheet, Text, View, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -8,6 +8,32 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const locImg = require('./images/location_img.jpg');
 
 class Location extends Component {
+    constructor(props){
+        super(props)
+        this.state = {data: [], ownerContactInfo: []}
+        this.getLocationData = this.getLocationData.bind(this)
+    }
+
+    async getLocationData(){
+        try{
+            await fetch('http://127.0.0.1:5000/api/location/getlocationdata',{
+                method: 'GET',
+                Accept: 'application/json',
+              })
+                .then((response) => response.json())
+                .then((results) => { this.setState({data: results, ownerContactInfo: results.OwnerContactInfo})});
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    componentDidMount() {
+        
+        this.getLocationData();
+        console.log(this.state.data)
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -23,7 +49,7 @@ class Location extends Component {
                 </View>
                 <Image style={styles.locImg} source={locImg}/>
                 <View style={styles.content}>
-                    <Text style={styles.title}>La Boulangerie Quotidienne</Text>
+                    <Text style={styles.title}>{this.state.data.name}</Text>
                     <View style={styles.row}>
                         <Text style={styles.subtitle}>4.9</Text>
                         <Icon style={{fontSize: 18}} name="star" color="#ffa600"/>
@@ -33,26 +59,23 @@ class Location extends Component {
                         <Icon style={{fontSize: 18}} name="star" color="#ffa600"/>
                     </View>
                     <View style={styles.row}>
-                        <Text style={styles.subtitle}>Bakery</Text>
+                        <Text style={styles.subtitle}>{this.state.data.TypeOfBusiness}</Text>
                     </View>
                     <View style={styles.row}>
                         <View style={styles.accIcon}>
-                            <Icon style={styles.innerIcon} name="accessibility" color="#fff"/>
-                        </View>
-                        <View style={styles.accIcon}>
                             <Icon style={styles.innerIcon} name="wheelchair-pickup" color="#fff"/>
-                        </View>
-                        <View style={styles.accIcon}>
-                            <Icon style={styles.innerIcon} name="local-parking" color="#fff"/>
                         </View>
                     </View>
 
                     <View style={styles.rowCenter}>
-                        <Text style={styles.navLinkSelect}>Overview</Text>
                         <Text style={styles.navLink} onPress={() => this.props.navigation.navigate("ReviewsPage")}>Accessibility Reviews</Text>
                     </View>
 
-                    <Image style={styles.detsImg} source={require('./images/details.png')}/>
+                    <View>
+                        <Text>Text: {this.state.ownerContactInfo.Text}</Text>
+                        <Text>Call: {this.state.ownerContactInfo.Call}</Text>
+                        <Text>Address: {this.state.ownerContactInfo.Address}</Text>
+                    </View>
 
                     {/* <Button
                         title="Suggest an edit"
@@ -62,7 +85,9 @@ class Location extends Component {
                 
             </View>
         )
+
     }
+
 }
 
 const styles = StyleSheet.create({
