@@ -30,6 +30,25 @@ class App extends Component {
             component={Home}
           />
           <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{ title: "Welcome to Unibility!" }}
+          />
+          <Stack.Screen name="CreateRating" component={CreateRating} />
+          <Stack.Screen name="Form" component={Form} />
+
+          <Stack.Screen
+            // options={{headerShown: false}}
+            name="Location"
+            component={Location}
+          />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Home"
+            component={Home}
+          />
+          <Stack.Screen
             name="ReportForm"
             component={ReportForm}
             options={{ headerShown: false }}
@@ -39,11 +58,9 @@ class App extends Component {
             component={TestBottomNav}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="Splash"
-            component={SplashScreen}
-            options={{ title: "Welcome to Unibility!" }}
-          />
+          <Stack.Screen name="UserSettings" component={UserSettings} />
+          <Stack.Screen name="CreateReport" component={CreateReport} />
+
           <Stack.Screen
             // options={{headerShown: false}}
             name="Location"
