@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import BottomSheet from "./components/BottomSheet";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Dimensions } from "react-native";
@@ -129,14 +129,14 @@ const Home = () => {
     ref?.current?.setSheet(!isActive);
   }, []);
 
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <ImageBackground source={image} style={styles.image}>
         <View style={styles.topNav}>
           <View style={styles.menuBtn}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("Profile")}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
               <Icon name="menu" color="#fff" style={styles.innerMenu} />
             </TouchableOpacity>
           </View>
@@ -144,9 +144,7 @@ const Home = () => {
             <Text color="#666">Search...</Text>
           </View>
         </View>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Location")}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("Location")}>
           <Icon style={styles.currLoc} name="location-on" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.fabButton} onPress={onPress}>

@@ -52,20 +52,7 @@ class App extends Component {
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="UserSettings" component={UserSettings} />
           <Stack.Screen name="CreateReport" component={CreateReport} />
-
-          <Stack.Screen
-            // options={{headerShown: false}}
-            name="Location"
-            component={Location}
-          />
-          <Stack.Screen name="Signup" component={Signup} />
-
           <Stack.Screen name="Login" component={Login} />
-
-          <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="UserSettings" component={UserSettings} />
-          <Stack.Screen name="CreateReport" component={CreateReport} />
-          <Stack.Screen name="CreateRating" component={CreateRating} />
           <Stack.Screen name="ReviewsPage" component={ReviewsPage} />
         </Stack.Navigator>
       </NavigationContainer>
