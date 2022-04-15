@@ -3,8 +3,10 @@ import React, {Component} from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Button, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import Form from './components/Form';
 
 class CreateRating extends Component{
+    /*
     render(){
         return(
             <SafeAreaView>
@@ -28,6 +30,64 @@ class CreateRating extends Component{
             </SafeAreaView>
         )
     }
+    */
+
+    handleSubmitForm = (stars, data) => {
+        console.log("parent submit called with message: stars - ", stars, ", body - ", data);
+        //submit clicked, send fetch request
+        
+        /*
+        obj = {};        
+        obj["rating"] = stars;
+        obj["body"] = body;
+        
+        console.log("object: ", obj);
+        */
+
+        /*
+        requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({rating: 1, body: "test body"})
+        };
+        */
+
+        /*
+        const content = {
+            rating: 1,
+            body: "some review"
+        }
+        */
+        
+
+        
+        fetch("http://localhost:5000/api/reviews/addreview", 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({rating: 1, body: "test body"})
+        })
+        .then(response => { 
+            console.log("response received. is ok = ", response.ok)
+            this.props.navigation.navigate("ReviewsPage");
+         })
+        
+    }
+
+    render(){
+        return(
+            <SafeAreaView>
+                <View>
+                    <Form parentCallback = {this.handleSubmitForm}/>
+                </View>
+            </SafeAreaView>
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({

@@ -14,6 +14,7 @@ import Signup from './Views/Signup';
 import Location from './Views/Location';
 import CreateRating from './Views/CreateRating';
 import ReviewsPage from './Views/ReviewsPage';
+import Form from './Views/components/Form';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,12 +23,20 @@ class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-        
-          <Stack.Screen
+        <Stack.Screen
             name='Splash'
             component={SplashScreen}
             options={{title: "Welcome to Unibility!"}}
           />
+        <Stack.Screen
+            name='CreateRating'
+            component={CreateRating}
+          />
+        <Stack.Screen
+            name='Form'
+            component={Form}
+          />
+          
           <Stack.Screen
             // options={{headerShown: false}}
             name="Location"
@@ -60,10 +69,7 @@ class App extends Component {
             name='CreateReport'
             component={CreateReport}
           />
-          <Stack.Screen
-            name='CreateRating'
-            component={CreateRating}
-          />
+          
           <Stack.Screen
             name='ReviewsPage'
             component={ReviewsPage}
