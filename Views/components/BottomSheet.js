@@ -33,8 +33,8 @@ const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
 
   const [firstRender, setFirstRender] = useState(true);
   const translateY = useSharedValue(0);
-  const [isUp, setIsUp] = useState(true);
-  const active = useSharedValue(true);
+  const [isUp, setIsUp] = useState(false);
+  const active = useSharedValue(false);
 
   const setSheet = useCallback(
     (sheetUp) => {
