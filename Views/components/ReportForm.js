@@ -15,6 +15,7 @@ import QuickReportForm from "./QuickReportForm";
 import ReportDetailsForm from "./ReportDetailsForm";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import * as Location from "expo-location";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -26,6 +27,8 @@ const emptyLocation = {
 };
 
 const ReportForm = ({ parentCallback }) => {
+  const navigation = useNavigation();
+
   const [isInvalidated, setIsInvalidated] = useState(true);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -109,7 +112,7 @@ const ReportForm = ({ parentCallback }) => {
           body: JSON.stringify({ type: reportType, location: coords }),
         }).then((response) => {
           console.log("response received. is ok = ", response.ok);
-          this.props.navigation.navigate("ReviewsPage");
+          navigation.navigate("Home");
         });
       }
     }
