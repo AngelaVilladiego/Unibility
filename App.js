@@ -26,6 +26,11 @@ class App extends Component {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
+            options={{ headerShown: false }}
+            name="Home"
+            component={Home}
+          />
+          <Stack.Screen
             name="Splash"
             component={SplashScreen}
             options={{ title: "Welcome to Unibility!" }}
@@ -39,11 +44,6 @@ class App extends Component {
             component={Location}
           />
           <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={Home}
-          />
           <Stack.Screen
             name="ReportForm"
             component={ReportForm}

@@ -1,57 +1,64 @@
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Button,
+  Pressable,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import FormContainer from "./FormContainer";
-import RadioGroup from "react-native-radio-buttons-group";
+import RadioButton from "./RadioButton";
 
 const radioButtonsData = [
   {
-    id: "1",
-    label: "General",
-    value: "general",
+    key: "general",
+    text: "General",
   },
   {
-    id: "2",
-    label: "Physical",
-    value: "physical",
+    key: "physical",
+    text: "Physical",
   },
   {
-    id: "3",
-    label: "Visual",
-    value: "visual",
+    key: "visual",
+    text: "Visual",
   },
   {
-    id: "4",
-    label: "Auditory",
-    value: "auditory",
+    key: "auditory",
+    text: "Auditory",
   },
   {
-    id: "5",
-    label: "Intellectual",
-    value: "intellectual",
+    key: "intellectual",
+    text: "Intellectual",
   },
   {
-    id: "6",
-    label: "Other",
-    value: "other",
+    key: "other",
+    text: "Other",
   },
 ];
 
-const QuickReportForm = () => {
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
+const QuickReportForm = ({ parentCallback }) => {
+  const [reportType, setReportType] = useState("");
 
-  const onPressRadioButton = (radioButtonsArray) => {
-    setRadioButtons(radioButtonsArray);
+  const onRadioValueChanged = (data) => {
+    setReportType(data);
   };
+
+  useEffect(() => {
+    parentCallback(reportType);
+  }, [reportType]);
 
   return (
     <FormContainer>
       <View style={styles.formContent}>
         <View style={styles.fieldGroup}>
           <Text style={styles.fieldTitle}>Report type</Text>
-          <RadioGroup
-            radioButtons={radioButtons}
-            onPress={onPressRadioButton}
-          />
+          <View style={styles.radioContainer}>
+            <RadioButton
+              parentCallback={onRadioValueChanged}
+              PROP={radioButtonsData}
+            />
+          </View>
         </View>
       </View>
     </FormContainer>
@@ -63,13 +70,22 @@ export default QuickReportForm;
 const styles = StyleSheet.create({
   formContent: {
     padding: 20,
+    paddingHorizontal: 20,
     width: "100%",
     flex: 1,
-    justifyContent: "space-around",
-    alignItems: "flex-start",
+    justifyContent: "space-between",
+    alignItems: "stretch",
   },
-  fieldTitle: {},
+  fieldTitle: {
+    paddingBottom: 15,
+    fontSize: 20,
+  },
   fieldGroup: {
     flex: 1,
+  },
+  radioContainer: {
+    flex: 1,
+    alignItems: "stretch",
+    paddingHorizontal: 10,
   },
 });

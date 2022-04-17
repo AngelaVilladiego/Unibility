@@ -21,6 +21,8 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 
+import { Icon } from "react-native-vector-icons/MaterialIcons";
+
 const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
 if (Platform.OS === "web") {
   const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -31,8 +33,8 @@ const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
 
   const [firstRender, setFirstRender] = useState(true);
   const translateY = useSharedValue(0);
-  const [isUp, setIsUp] = useState(false);
-  const active = useSharedValue(false);
+  const [isUp, setIsUp] = useState(true);
+  const active = useSharedValue(true);
 
   const setSheet = useCallback(
     (sheetUp) => {
@@ -52,6 +54,10 @@ const BottomSheet = React.forwardRef(({ children, bgColor }, ref) => {
   ]);
 
   useEffect(() => {
+    translateY.value = withSpring(isUp ? -((2 * SCREEN_HEIGHT) / 3) : 0, {
+      damping: 16,
+      stiffness: 175,
+    });
     setFirstRender(false);
   }, []);
 
@@ -97,5 +103,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     overflow: "hidden",
     justifyContent: "flex-start",
+    borderColor: "#ccc",
+    borderWidth: 1,
   },
 });

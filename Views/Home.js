@@ -9,15 +9,16 @@ import {
   Button,
   TextInput,
   Platform,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 import BottomSheet from "./components/BottomSheet";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import { Dimensions } from "react-native";
-
 import Icon from "react-native-vector-icons/MaterialIcons";
+import QuickReportForm from "./components/QuickReportForm";
+import ReportForm from "./components/ReportForm";
 
 const { height, width } = Dimensions.get("window");
 
@@ -25,7 +26,91 @@ const actualDimensions = {};
 
 const image = require("./images/mapbackground.png");
 
+const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
+if (Platform.OS === "web") {
+  const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+}
+
+const Home = () => {
+  const ref = useRef(null);
+
+  const onPress = useCallback(() => {
+    const isActive = ref?.current?.isActive();
+    ref?.current?.setSheet(!isActive);
+  }, []);
+
+  const closeBottomSheetIfOpen = useCallback(() => {
+    const isActive = ref?.current?.isActive();
+    if (isActive) {
+      ref?.current?.setSheet(!isActive);
+    }
+  });
+
+  const navigation = useNavigation();
+
+  return (
+    <View style={styles.container}>
+      <TouchableWithoutFeedback
+        style={{ flex: 1 }}
+        onPress={closeBottomSheetIfOpen}
+      >
+        <ImageBackground source={image} style={styles.image}>
+          <View style={styles.topNav}>
+            <View style={styles.menuBtn}>
+              <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                <Icon name="menu" color="#fff" style={styles.innerMenu} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.searchBox}>
+              <Text color="#666">Search...</Text>
+            </View>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Location")}>
+            <Icon style={styles.currLoc} name="location-on" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.fabButton} onPress={onPress}>
+            <Icon
+              style={styles.fabButtonInner}
+              name="maps-ugc"
+              color="#ed6b00"
+            />
+          </TouchableOpacity>
+        </ImageBackground>
+      </TouchableWithoutFeedback>
+      <BottomSheet ref={ref} bgColor={"#EEE"}>
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Report an issue</Text>
+          <ReportForm />
+          <TouchableOpacity onPress={onPress} style={styles.closeBtn}>
+            <Icon name={"close"} color="white" size={15} />
+          </TouchableOpacity>
+        </View>
+      </BottomSheet>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 25,
+    fontWeight: "700",
+    marginTop: 30,
+    paddingLeft: 20,
+  },
+  closeIcn: {
+    fontWeight: "1000",
+  },
+  closeBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    position: "absolute",
+    top: 15,
+    right: 15,
+    backgroundColor: "black",
+  },
   container: {
     flex: 1,
     display: "flex",
@@ -33,6 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "stretch",
     alignContent: "center",
+    overflow: "hidden",
   },
   image: {
     flex: 1,
@@ -112,52 +198,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     height: (2 * SCREEN_HEIGHT) / 3,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
-
-const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
-if (Platform.OS === "web") {
-  const { height: SCREEN_HEIGHT } = Dimensions.get("window");
-}
-
-const Home = () => {
-  const ref = useRef(null);
-  const onPress = useCallback(() => {
-    const isActive = ref?.current?.isActive();
-    ref?.current?.setSheet(!isActive);
-  }, []);
-
-  const navigation = useNavigation();
-
-  return (
-    <View style={styles.container}>
-      <ImageBackground source={image} style={styles.image}>
-        <View style={styles.topNav}>
-          <View style={styles.menuBtn}>
-            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-              <Icon name="menu" color="#fff" style={styles.innerMenu} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.searchBox}>
-            <Text color="#666">Search...</Text>
-          </View>
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Location")}>
-          <Icon style={styles.currLoc} name="location-on" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.fabButton} onPress={onPress}>
-          <Icon style={styles.fabButtonInner} name="maps-ugc" color="#ed6b00" />
-        </TouchableOpacity>
-      </ImageBackground>
-      <BottomSheet ref={ref} bgColor={"#444"}>
-        <View style={styles.formContainer}>
-          <TouchableOpacity style={styles.button} onPress={onPress} />
-        </View>
-      </BottomSheet>
-    </View>
-  );
-};
 
 export default Home;
