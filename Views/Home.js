@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   closeIcn: {
-    fontWeight: "1000",
+    fontWeight: "900",
   },
   closeBtn: {
     justifyContent: "center",

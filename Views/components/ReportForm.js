@@ -14,15 +14,78 @@ import { ScrollView } from "react-native-gesture-handler";
 import QuickReportForm from "./QuickReportForm";
 import ReportDetailsForm from "./ReportDetailsForm";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import * as Location from "expo-location";
 
 const { width } = Dimensions.get("window");
 
+const emptyLocation = {
+  location: {
+    latitude: 0.0,
+    longitude: 0.0,
+  },
+};
+
 const ReportForm = ({ parentCallback }) => {
   const [isInvalidated, setIsInvalidated] = useState(true);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [currPage, setCurrPage] = useState(0);
+  const [reportType, setReportType] = useState("");
+  const [coords, setCoords] = useState({
+    location: {
+      latitude: 0.0,
+      longitude: 0.0,
+    },
+  });
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  useEffect(() => {
+    if (location != null) {
+      let gotCoords = location["coords"];
+      console.log("location retrieved: latitude", location["coords"]);
+      setCoords({
+        ...coords,
+        location: {
+          latitude: gotCoords["latitude"],
+          longitude: gotCoords["longitude"],
+        },
+      });
+    }
+  }, [location]);
+
+  useEffect(() => {
+    console.log(coords);
+  }, [coords]);
 
   useEffect(() => {
     console.log("invalid? ", isInvalidated);
   }, [isInvalidated]);
+
+  const requestLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      setErrorMsg("Permission to access location was denied");
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+  };
+
+  const getLocation = async () => {
+    let { status } = await Location.getForegroundPermissionsAsync();
+    if (status !== "granted") {
+      console.log(status);
+      setErrorMsg("Permission to access location was denied");
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+  };
 
   const onSubmit = () => {
     console.log("report type is: ", reportType);
@@ -32,33 +95,30 @@ const ReportForm = ({ parentCallback }) => {
       if (isInvalidated) {
         setIsInvalidated(false);
       }
-      //handle fetch
+      if (coords === emptyLocation) {
+        Alert.alert(
+          "Cannot create a report if permissions are denied.",
+          "You must allow course and fine location permissions for this app in your phone settings."
+        );
+      } else if (coords != null) {
+        fetch("http://localhost:5000/api/reviews/addreport", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ type: reportType, location: coords }),
+        }).then((response) => {
+          console.log("response received. is ok = ", response.ok);
+          this.props.navigation.navigate("ReviewsPage");
+        });
+      }
     }
   };
 
-  const alertReportType = () => {
-    Alert.alert(
-      "Report Incomplete",
-      "Report type is required."[
-        {
-          text: "Ok",
-          onPress: () => console.log("Ok pressed"),
-        }
-      ],
-      {
-        cancelable: true,
-        onDismiss: () => console.log("cancelledd by clicking outside"),
-      }
-    );
-  };
-
-  const [currPage, setCurrPage] = useState(0);
-
-  const [reportType, setReportType] = useState("");
-
   const handleReportType = (data) => {
+    console.log("is this it? ", data);
     setReportType(data);
-    if (data != "") {
+    if (data != "" && data != null) {
       setIsInvalidated(false);
     }
   };
@@ -109,11 +169,7 @@ const ReportForm = ({ parentCallback }) => {
           ]}
           onPress={onPrevious}
         >
-          <Icon
-            style={styles.btnIcon}
-            name={"keyboard-arrow-left"}
-            size={"15"}
-          />
+          <Icon style={styles.btnIcon} name={"keyboard-arrow-left"} size={15} />
           <Text
             selectable={currPage != 0}
             style={[styles.btnText, { opacity: currPage === 0 ? 0 : 1 }]}
@@ -147,7 +203,7 @@ const ReportForm = ({ parentCallback }) => {
           <Icon
             style={styles.btnIcon}
             name={"keyboard-arrow-right"}
-            size={"15"}
+            size={15}
           />
         </Pressable>
       </View>

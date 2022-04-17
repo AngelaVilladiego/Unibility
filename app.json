@@ -7,5 +7,16 @@
       "**/*"
     ]
   },
-  "name": "Unibility"
+  "name": "Unibility",
+  "ios" : {
+    "infoPlist": {
+      "UIBackgroundModes": [
+        "location"
+      ],
+      "NSLocationAlwaysUsageDescription": "This app uses location for map capabilities and to add reports at current location"
+    }
+  },
+  "android": {
+    "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "FOREGROUND_SERVICE"]
+  }
 }

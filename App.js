@@ -17,10 +17,36 @@ import CreateRating from "./Views/CreateRating";
 import ReviewsPage from "./Views/ReviewsPage";
 import ReportForm from "./Views/components/ReportForm";
 import Form from "./Views/components/Form";
+import * as TaskManager from "expo-task-manager";
+import * as LocationService from "expo-location";
 
 const Stack = createNativeStackNavigator();
+const LOCATION_TASK_NAME = "foreground-location-task";
+
+const requestPermissions = async () => {
+  const { status } = await LocationService.requestForegroundPermissionsAsync();
+  if (status === "granted") {
+    await LocationService.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+      accuracy: LocationService.Accuracy.Balanced,
+    });
+  }
+};
+
+TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
+  if (error) {
+    console.log("HANDLE THIS LOCATION ERROR LATER");
+    return;
+  }
+  if (data) {
+    const { locations } = data;
+  }
+});
 
 class App extends Component {
+  componentDidMount() {
+    requestPermissions();
+  }
+
   render() {
     return (
       <NavigationContainer>
