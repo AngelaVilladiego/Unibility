@@ -20,10 +20,8 @@ import { useNavigation } from "@react-navigation/native";
 const { width } = Dimensions.get("window");
 
 const emptyLocation = {
-  location: {
-    latitude: 0.0,
-    longitude: 0.0,
-  },
+  latitude: 0.0,
+  longitude: 0.0,
 };
 
 const ReportForm = ({ parentCallback }) => {
@@ -35,10 +33,8 @@ const ReportForm = ({ parentCallback }) => {
   const [currPage, setCurrPage] = useState(0);
   const [reportType, setReportType] = useState("");
   const [coords, setCoords] = useState({
-    location: {
-      latitude: 0.0,
-      longitude: 0.0,
-    },
+    latitude: 0.0,
+    longitude: 0.0,
   });
 
   useEffect(() => {
@@ -51,10 +47,8 @@ const ReportForm = ({ parentCallback }) => {
       console.log("location retrieved: latitude", location["coords"]);
       setCoords({
         ...coords,
-        location: {
-          latitude: gotCoords["latitude"],
-          longitude: gotCoords["longitude"],
-        },
+        latitude: gotCoords["latitude"],
+        longitude: gotCoords["longitude"],
       });
     }
   }, [location]);
@@ -104,7 +98,9 @@ const ReportForm = ({ parentCallback }) => {
           "You must allow course and fine location permissions for this app in your phone settings."
         );
       } else if (coords != null) {
-        fetch("http://localhost:5000/api/reviews/addreport", {
+        let bodyJson = JSON.stringify({ type: reportType, location: coords });
+        console.log(bodyJson);
+        fetch("http://localhost:5000/api/reports/addreport", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
