@@ -108,7 +108,7 @@ const ReportForm = ({ parentCallback }) => {
           body: JSON.stringify({ type: reportType, location: coords }),
         }).then((response) => {
           console.log("response received. is ok = ", response.ok);
-          navigation.navigate("Home");
+          parentCallback();
         });
       }
     }

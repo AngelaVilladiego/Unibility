@@ -47,6 +47,9 @@ const Home = () => {
   });
 
   const navigation = useNavigation();
+  const onSubmitForm = () => {
+    closeBottomSheetIfOpen();
+  };
 
   return (
     <View style={styles.container}>
@@ -80,7 +83,7 @@ const Home = () => {
       <BottomSheet ref={ref} bgColor={"#EEE"}>
         <View style={styles.formContainer}>
           <Text style={styles.title}>Report an issue</Text>
-          <ReportForm />
+          <ReportForm parentCallback={onSubmitForm} />
           <TouchableOpacity onPress={onPress} style={styles.closeBtn}>
             <Icon name={"close"} color="white" size={15} />
           </TouchableOpacity>
